@@ -1,3 +1,17 @@
+//Animal이라는 기본 클래스 안에 makeSound() 라는 "순수 가상 함수"
+//Animal 클래스를 상속받은 Dog,Cat,Cow 클래스 존재. -> 오버라이딩을 이용하여 makeSound() 함수 재정의
+//메인함수에서 Animal타입의 포인터 배열 선언, 2번째 줄의 동물들을 배열의 원소로 선언.
+//반복문으로 순회-> 각 동물의 울음소리 출력
+//Zoo라는 또 다른 클래스
+    //=>동물들을 동물원에 추가하고 울음소리 출력 +소멸자
+//createRandomAnimal 함수 추가() 
+    //0, 1, 2 중 하나의 난수를 생성 각각 Dog, Cat, Cow 객체 중 하나를 동적으로 생성
+
+
+
+
+
+
 #include <iostream>
 using namespace std;
 
@@ -26,25 +40,25 @@ public://Animal의 자식클래스인 Cow에서 makeSound()함수 재정의 => o
 class Zoo {
 private:
     Animal* animals[10];
-    int count=0;
+    int animalCount=0;
 
 public:
     //동물원에 동물 추가
     void addAnimal(Animal* animal) {
-        if (count < 10) { animals[count++] = animal; }
+        if (animalCount < 10) { animals[animalCount++] = animal; }
         else { cout << "배열 크기 초과" << endl; }
     }
 
     //makeSound 함수 실행
     void performActions() {
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < animalCount; i++) {
             animals[i]->makeSound(); //소리 출력
         }
     }
 
     //Zoo 소멸자
     ~Zoo() {
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < animalCount; i++) {
             delete animals[i];
         }
     }
