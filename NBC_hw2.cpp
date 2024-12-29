@@ -8,10 +8,6 @@
     //0, 1, 2 중 하나의 난수를 생성 각각 Dog, Cat, Cow 객체 중 하나를 동적으로 생성
 
 
-
-
-
-
 #include <iostream>
 using namespace std;
 
