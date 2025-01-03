@@ -1,9 +1,11 @@
+//ë¯¸ë‹ˆë„ì„œê´€ ë§Œë“¤ê¸° ^0^
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include <unordered_map>
 
-using namespace std; // namespace std »ç¿ë
+using namespace std; // namespace std ì‚¬ìš©
 
 class Book {
 public:
@@ -29,7 +31,7 @@ public:
             stock[title]--;
         }
         else {
-            cout << "´ë¿©ºÒ°¡" << endl;
+            cout << "ëŒ€ì—¬ë¶ˆê°€" << endl;
         }
     }
     void returnBook(string& title) {
@@ -37,16 +39,16 @@ public:
 
     }
     void displayStock() {
-        cout << "Ã¥ Àç°í ÇöÈ²" << endl;
+        cout << "ì±… ì¬ê³  í˜„í™©" << endl;
 
         for (auto& pair : stock) {
-            cout << "=> " << pair.first << "ÀÇ ³²Àº Àç°í : " << pair.second << endl;
+            cout << "=> " << pair.first << "ì˜ ë‚¨ì€ ì¬ê³  : " << pair.second << endl;
 
         }
     }
-    int getCount(string& title) {//´ë¿© °¡´É È½¼ö Ä«¿îÆ® ÇÔ¼ö
-        auto book = stock.find(title);//Ã¥ Ã£±â
-        if (book != stock.end()) {//Ã£¾Æ¼­ ¾øÁö¾ÊÀ¸¸é (=ÀÖÀ¸¸é), µÎ¹ø¤Š pair ¹İÈ¯ÇÏ±â
+    int getCount(string& title) {//ëŒ€ì—¬ ê°€ëŠ¥ íšŸìˆ˜ ì¹´ìš´íŠ¸ í•¨ìˆ˜
+        auto book = stock.find(title);//ì±… ì°¾ê¸°
+        if (book != stock.end()) {//ì°¾ì•„ì„œ ì—†ì§€ì•Šìœ¼ë©´ (=ìˆìœ¼ë©´), ë‘ë²ˆÂŠ pair ë°˜í™˜í•˜ê¸°
             return book->second;
         }
         else
@@ -56,68 +58,68 @@ public:
 
 class BookManager {
 private:
-    vector<Book> books; // Ã¥ ¸ñ·Ï ÀúÀå
+    vector<Book> books; // ì±… ëª©ë¡ ì €ì¥
     BorrowManager* borrowmanager;
 
 public:
     BookManager() = default;
     BookManager(BorrowManager* bm) : borrowmanager(bm) {} 
 
-    // Ã¥ Ãß°¡ ¸Ş¼­µå
+    // ì±… ì¶”ê°€ ë©”ì„œë“œ
     void addBook(const string& title, const string& author) {
         Book initbook = Book(title, author);
-        books.push_back(initbook); // push_back »ç¿ë
-        cout << "Ã¥ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù: " << title << " by " << author << endl;
+        books.push_back(initbook); // push_back ì‚¬ìš©
+        cout << "ì±…ì´ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤: " << title << " by " << author << endl;
         
         borrowmanager->initializeStock(initbook);
     }
-    // ¸ğµç Ã¥ Ãâ·Â ¸Ş¼­µå
+    // ëª¨ë“  ì±… ì¶œë ¥ ë©”ì„œë“œ
     void displayAllBooks() const {
         if (books.empty()) {
-            cout << "ÇöÀç µî·ÏµÈ Ã¥ÀÌ ¾ø½À´Ï´Ù." << endl;
+            cout << "í˜„ì¬ ë“±ë¡ëœ ì±…ì´ ì—†ìŠµë‹ˆë‹¤." << endl;
             return;
         }
-        cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-        cout << "ÇöÀç µµ¼­ ¸ñ·Ï:" << endl;
-        for (size_t i = 0; i < books.size(); i++) { // ÀÏ¹İÀûÀÎ for¹® »ç¿ë
+        cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+        cout << "í˜„ì¬ ë„ì„œ ëª©ë¡:" << endl;
+        for (size_t i = 0; i < books.size(); i++) { // ì¼ë°˜ì ì¸ forë¬¸ ì‚¬ìš©
             cout << "- " << books[i].title << " by " << books[i].author << endl;
         }
     }
     void searchByTitle(const string title) {
-        cout << "°Ë»ö °á°ú : "<<title<<endl;
+        cout << "ê²€ìƒ‰ ê²°ê³¼ : "<<title<<endl;
         vector<Book> results;
         for (auto book : books) {
-            if (book.title.find(title) != string::npos) {//npos : °ªÀ» ¸øÃ£¾ÒÀ»¶§ ¹İÈ¯°ª. => °Ë»ö¾î°¡ ÀÖÀ»¶§
+            if (book.title.find(title) != string::npos) {//npos : ê°’ì„ ëª»ì°¾ì•˜ì„ë•Œ ë°˜í™˜ê°’. => ê²€ìƒ‰ì–´ê°€ ìˆì„ë•Œ
                 results.push_back(book);
             }
         }
 
         if (results.empty()) {
-            cout << "°Ë»öµÈ Ã¥ÀÌ ¾ø½À´Ï´Ù." << endl;
+            cout << "ê²€ìƒ‰ëœ ì±…ì´ ì—†ìŠµë‹ˆë‹¤." << endl;
         }
         else {
-            cout << "°Ë»öµÈ Ã¥" << endl;
+            cout << "ê²€ìƒ‰ëœ ì±…" << endl;
             for (auto book : results) {
-                cout << "=> " << book.title << "-" << book.author << "/ ´ë¿© °¡´É È½¼ö:  "<< borrowmanager->getCount(book.title) << endl;
+                cout << "=> " << book.title << "-" << book.author << "/ ëŒ€ì—¬ ê°€ëŠ¥ íšŸìˆ˜:  "<< borrowmanager->getCount(book.title) << endl;
             }
         }
     }
     void searchByAuthor(const string author) {
-        cout << "°Ë»öÇÒ ÀúÀÚ : "<< author << endl;
+        cout << "ê²€ìƒ‰í•  ì €ì : "<< author << endl;
         vector<Book> results;
         for (auto book : books) {
-            if (book.author.find(author) != string::npos) {//npos : °ªÀ» ¸øÃ£¾ÒÀ»¶§ ¹İÈ¯°ª. => °Ë»ö¾î°¡ ÀÖÀ»¶§
+            if (book.author.find(author) != string::npos) {//npos : ê°’ì„ ëª»ì°¾ì•˜ì„ë•Œ ë°˜í™˜ê°’. => ê²€ìƒ‰ì–´ê°€ ìˆì„ë•Œ
                 results.push_back(book);
             }
         }
 
         if (results.empty()) {
-            cout << "°Ë»öµÈ Ã¥ÀÌ ¾ø½À´Ï´Ù." << endl;
+            cout << "ê²€ìƒ‰ëœ ì±…ì´ ì—†ìŠµë‹ˆë‹¤." << endl;
         }
         else {
-            cout << "°Ë»öµÈ Ã¥" << endl;
+            cout << "ê²€ìƒ‰ëœ ì±…" << endl;
             for (auto book : results) {
-                cout << "=> " << book.title << "-" << book.author << "/ ´ë¿© °¡´É È½¼ö:  " << borrowmanager->getCount(book.title)<<endl;
+                cout << "=> " << book.title << "-" << book.author << "/ ëŒ€ì—¬ ê°€ëŠ¥ íšŸìˆ˜:  " << borrowmanager->getCount(book.title)<<endl;
             }
         }
 
@@ -131,75 +133,75 @@ int main() {
     
     BorrowManager borrowmanager;
     BookManager manager(&borrowmanager);
-    // µµ¼­°ü °ü¸® ÇÁ·Î±×·¥ÀÇ ±âº» ¸Ş´º¸¦ ¹İº¹ÀûÀ¸·Î Ãâ·ÂÇÏ¿© »ç¿ëÀÚ ÀÔ·ÂÀ» Ã³¸®ÇÕ´Ï´Ù.
-    // ÇÁ·Î±×·¥ Á¾·á¸¦ ¼±ÅÃÇÏ±â Àü±îÁö °è¼Ó µ¿ÀÛÇÕ´Ï´Ù.
+    // ë„ì„œê´€ ê´€ë¦¬ í”„ë¡œê·¸ë¨ì˜ ê¸°ë³¸ ë©”ë‰´ë¥¼ ë°˜ë³µì ìœ¼ë¡œ ì¶œë ¥í•˜ì—¬ ì‚¬ìš©ì ì…ë ¥ì„ ì²˜ë¦¬í•©ë‹ˆë‹¤.
+    // í”„ë¡œê·¸ë¨ ì¢…ë£Œë¥¼ ì„ íƒí•˜ê¸° ì „ê¹Œì§€ ê³„ì† ë™ì‘í•©ë‹ˆë‹¤.
 
-    manager.addBook("¿¹½ÃÃ¥1", "¿¹½ÃÀúÀÚ1");
-    manager.addBook("¿¹½ÃÃ¥2", "¿¹½ÃÀúÀÚ2");
-    manager.addBook("¿¹½ÃÃ¥3", "¿¹½ÃÀúÀÚ3");
-    manager.addBook("¿¹½ÃºÏ1", "¿¹½ÃÀúÀÚ1");
-    manager.addBook("¿¹½ÃºÏ2", "¿¹½ÃÀúÀÚ2");
-    manager.addBook("¿¹½ÃºÏ3", "¿¹½ÃÀúÀÚ3");
+    manager.addBook("ì˜ˆì‹œì±…1", "ì˜ˆì‹œì €ì1");
+    manager.addBook("ì˜ˆì‹œì±…2", "ì˜ˆì‹œì €ì2");
+    manager.addBook("ì˜ˆì‹œì±…3", "ì˜ˆì‹œì €ì3");
+    manager.addBook("ì˜ˆì‹œë¶1", "ì˜ˆì‹œì €ì1");
+    manager.addBook("ì˜ˆì‹œë¶2", "ì˜ˆì‹œì €ì2");
+    manager.addBook("ì˜ˆì‹œë¶3", "ì˜ˆì‹œì €ì3");
 
     while (true) {
-        cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-        cout << "\nµµ¼­°ü °ü¸® ÇÁ·Î±×·¥" << endl;
-        cout << "1. Ã¥ Ãß°¡" << endl; // Ã¥ Á¤º¸¸¦ ÀÔ·Â¹Ş¾Æ Ã¥ ¸ñ·Ï¿¡ Ãß°¡
-        cout << "2. ¸ğµç Ã¥ Ãâ·Â" << endl; // ÇöÀç Ã¥ ¸ñ·Ï¿¡ ÀÖ´Â ¸ğµç Ã¥ Ãâ·Â
-        cout << "3. Ã¥ °Ë»ö" << endl;
-        cout << "4. Ã¥ ´ë¿©" << endl;
-        cout << "5. Ã¥ ¹İ³³" << endl;
-        cout << "6. Ã¥ Àç°í ÇöÈ²" << endl;
-        cout << "7. Á¾·á" << endl; // ÇÁ·Î±×·¥ Á¾·á
-        cout << "¼±ÅÃ: ";
+        cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+        cout << "\në„ì„œê´€ ê´€ë¦¬ í”„ë¡œê·¸ë¨" << endl;
+        cout << "1. ì±… ì¶”ê°€" << endl; // ì±… ì •ë³´ë¥¼ ì…ë ¥ë°›ì•„ ì±… ëª©ë¡ì— ì¶”ê°€
+        cout << "2. ëª¨ë“  ì±… ì¶œë ¥" << endl; // í˜„ì¬ ì±… ëª©ë¡ì— ìˆëŠ” ëª¨ë“  ì±… ì¶œë ¥
+        cout << "3. ì±… ê²€ìƒ‰" << endl;
+        cout << "4. ì±… ëŒ€ì—¬" << endl;
+        cout << "5. ì±… ë°˜ë‚©" << endl;
+        cout << "6. ì±… ì¬ê³  í˜„í™©" << endl;
+        cout << "7. ì¢…ë£Œ" << endl; // í”„ë¡œê·¸ë¨ ì¢…ë£Œ
+        cout << "ì„ íƒ: ";
 
-        int choice; // »ç¿ëÀÚÀÇ ¸Ş´º ¼±ÅÃÀ» ÀúÀå
+        int choice; // ì‚¬ìš©ìì˜ ë©”ë‰´ ì„ íƒì„ ì €ì¥
         cin >> choice;
         string title, author;
         if (choice == 1) {
-            // 1¹ø ¼±ÅÃ: Ã¥ Ãß°¡
-            // »ç¿ëÀÚ·ÎºÎÅÍ Ã¥ Á¦¸ñ°ú ÀúÀÚ¸íÀ» ÀÔ·Â¹Ş¾Æ BookManager¿¡ Ãß°¡ÇÕ´Ï´Ù.
-            cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-            cout << "Ã¥ Ãß°¡ÇÏ±â" << endl;
-            cout << "Ã¥ Á¦¸ñ: ";
-            cin.ignore(); // ÀÌÀü ÀÔ·ÂÀÇ ÀÜ¿© ¹öÆÛ¸¦ Á¦°Å
-            getline(cin, title); // Á¦¸ñ ÀÔ·Â (°ø¹é Æ÷ÇÔ)
-            cout << "Ã¥ ÀúÀÚ: ";
-            getline(cin, author); // ÀúÀÚ¸í ÀÔ·Â (°ø¹é Æ÷ÇÔ)
-            manager.addBook(title, author); // ÀÔ·Â¹ŞÀº Ã¥ Á¤º¸¸¦ Ãß°¡
+            // 1ë²ˆ ì„ íƒ: ì±… ì¶”ê°€
+            // ì‚¬ìš©ìë¡œë¶€í„° ì±… ì œëª©ê³¼ ì €ìëª…ì„ ì…ë ¥ë°›ì•„ BookManagerì— ì¶”ê°€í•©ë‹ˆë‹¤.
+            cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+            cout << "ì±… ì¶”ê°€í•˜ê¸°" << endl;
+            cout << "ì±… ì œëª©: ";
+            cin.ignore(); // ì´ì „ ì…ë ¥ì˜ ì”ì—¬ ë²„í¼ë¥¼ ì œê±°
+            getline(cin, title); // ì œëª© ì…ë ¥ (ê³µë°± í¬í•¨)
+            cout << "ì±… ì €ì: ";
+            getline(cin, author); // ì €ìëª… ì…ë ¥ (ê³µë°± í¬í•¨)
+            manager.addBook(title, author); // ì…ë ¥ë°›ì€ ì±… ì •ë³´ë¥¼ ì¶”ê°€
         }
         else if (choice == 2) {
-            // 2¹ø ¼±ÅÃ: ¸ğµç Ã¥ Ãâ·Â
-            // ÇöÀç BookManager¿¡ ÀúÀåµÈ Ã¥ ¸ñ·ÏÀ» Ãâ·ÂÇÕ´Ï´Ù.
+            // 2ë²ˆ ì„ íƒ: ëª¨ë“  ì±… ì¶œë ¥
+            // í˜„ì¬ BookManagerì— ì €ì¥ëœ ì±… ëª©ë¡ì„ ì¶œë ¥í•©ë‹ˆë‹¤.
             manager.displayAllBooks();
         }
         else if (choice == 3) {
-            // 3¹ø ¼±ÅÃ: °Ë»ö
-            // Ã¥ Á¦¸ñÀ¸·Î °Ë»ö or ÀúÀÚ·Î °Ë»ö
-            cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-            cout << "¾î¶² ¹æ½ÄÀ¸·Î °Ë»öÇÒ±î¿ä?" << endl;
-            cout << "1. Ã¥ Á¦¸ñ"<< endl;
-            cout << "2. Ã¥ ÀúÀÚ" << endl;
-            cout << "¼±ÅÃ : " << endl;
+            // 3ë²ˆ ì„ íƒ: ê²€ìƒ‰
+            // ì±… ì œëª©ìœ¼ë¡œ ê²€ìƒ‰ or ì €ìë¡œ ê²€ìƒ‰
+            cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+            cout << "ì–´ë–¤ ë°©ì‹ìœ¼ë¡œ ê²€ìƒ‰í• ê¹Œìš”?" << endl;
+            cout << "1. ì±… ì œëª©"<< endl;
+            cout << "2. ì±… ì €ì" << endl;
+            cout << "ì„ íƒ : " << endl;
             int choice2 = 0;
             cin >> choice2;
             if (choice2 == 1) {
-                cout << "°Ë»öÇÒ Ã¥ ÀÌ¸§ : " ;
+                cout << "ê²€ìƒ‰í•  ì±… ì´ë¦„ : " ;
                 cin.ignore();
                 getline(cin,title);
                 manager.searchByTitle(title);
             }
             else if(choice2 == 2) {
-                cout << "°Ë»öÇÒ ÀúÀÚ ÀÌ¸§ : ";
+                cout << "ê²€ìƒ‰í•  ì €ì ì´ë¦„ : ";
                 cin.ignore();
                 getline(cin, author);
                 manager.searchByAuthor(author);
             }
         }
         else if (choice == 4) {
-            // 4¹ø ¼±ÅÃ : Ã¥ ´ë¿©
-            cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-            cout << "´ë¿©ÇÒ Ã¥ ÀÌ¸§: ";
+            // 4ë²ˆ ì„ íƒ : ì±… ëŒ€ì—¬
+            cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+            cout << "ëŒ€ì—¬í•  ì±… ì´ë¦„: ";
             cin.ignore();
             getline(cin, title);
             borrowmanager.borrowBook(title);
@@ -207,34 +209,34 @@ int main() {
         }
 
         else if (choice == 5) {
-            // 5¹ø ¼±ÅÃ : Ã¥ ¹İ³³
-            cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-            cout << "¹İ³³ÇÒ Ã¥ ÀÌ¸§: ";
+            // 5ë²ˆ ì„ íƒ : ì±… ë°˜ë‚©
+            cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+            cout << "ë°˜ë‚©í•  ì±… ì´ë¦„: ";
             cin.ignore();
             getline(cin, title);
             borrowmanager.returnBook(title);
 
         }
         else if (choice == 6) {
-            // 6¹ø ¼±ÅÃ : Ã¥ Àç°í È®ÀÎ
-            cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
+            // 6ë²ˆ ì„ íƒ : ì±… ì¬ê³  í™•ì¸
+            cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
             borrowmanager.displayStock();
         }
 
         else if (choice == 7) {
-            // 3¹ø ¼±ÅÃ: Á¾·á
-            // ÇÁ·Î±×·¥À» Á¾·áÇÏ°í »ç¿ëÀÚ¿¡°Ô ¸Ş½ÃÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.
-            cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-            cout << "ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù." << endl;
-            break; // while ·çÇÁ Á¾·á
+            // 3ë²ˆ ì„ íƒ: ì¢…ë£Œ
+            // í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•˜ê³  ì‚¬ìš©ìì—ê²Œ ë©”ì‹œì§€ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.
+            cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+            cout << "í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤." << endl;
+            break; // while ë£¨í”„ ì¢…ë£Œ
         }
         else {
-            // Àß¸øµÈ ÀÔ·Â Ã³¸®
-            // ¸Ş´º¿¡ ¾ø´Â ¹øÈ£¸¦ ÀÔ·ÂÇßÀ» °æ¿ì °æ°í ¸Ş½ÃÁö¸¦ Ãâ·ÂÇÕ´Ï´Ù.
-            cout << "¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ¤Ñ" << endl;
-            cout << "Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä." << endl;
+            // ì˜ëª»ëœ ì…ë ¥ ì²˜ë¦¬
+            // ë©”ë‰´ì— ì—†ëŠ” ë²ˆí˜¸ë¥¼ ì…ë ¥í–ˆì„ ê²½ìš° ê²½ê³  ë©”ì‹œì§€ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤.
+            cout << "ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡ã…¡" << endl;
+            cout << "ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”." << endl;
         }
     }
 
-    return 0; // ÇÁ·Î±×·¥ Á¤»ó Á¾·á
+    return 0; // í”„ë¡œê·¸ë¨ ì •ìƒ ì¢…ë£Œ
 }
