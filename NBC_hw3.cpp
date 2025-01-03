@@ -5,18 +5,18 @@ template <typename T>
 class SimpleVector {
 private:
     T* data;
-    int currentSize; //ÇöÀç ¿ø¼Ò °¹¼ö
-    int currentCapacity; // ÃÖ´ë ±æÀÌ
-    void resize(int newCapacity) {//ÇÁ¶óÀÌºø ÇÔ¼ö
-        T* newdata = new T[newCapacity]; //ÃÖ´ë±æÀÌ+5ÀÇ ±æÀÌÀÎ »õ·Î¿î ¹è¿­ »ı¼º
+    int currentSize; //í˜„ì¬ ì›ì†Œ ê°¯ìˆ˜
+    int currentCapacity; // ìµœëŒ€ ê¸¸ì´
+    void resize(int newCapacity) {//í”„ë¼ì´ë¹— í•¨ìˆ˜
+        T* newdata = new T[newCapacity]; //ìµœëŒ€ê¸¸ì´+5ì˜ ê¸¸ì´ì¸ ìƒˆë¡œìš´ ë°°ì—´ ìƒì„±
 
-        for (int i = 0; i < currentSize; i++) {//±âÁ¸¹è¿­ º¹»çÇØ¿À±â
+        for (int i = 0; i < currentSize; i++) {//ê¸°ì¡´ë°°ì—´ ë³µì‚¬í•´ì˜¤ê¸°
             newdata[i] = data[i];
         }
 
-        delete[] data;//±âÁ¸ ¹è¿­ »èÁ¦
-        data = newdata;//¹è¿­ ¾÷µ¥ÀÌÆ®
-        currentCapacity = newCapacity;//»çÀÌÁî ¾÷µ¥ÀÌÆ®
+        delete[] data;//ê¸°ì¡´ ë°°ì—´ ì‚­ì œ
+        data = newdata;//ë°°ì—´ ì—…ë°ì´íŠ¸
+        currentCapacity = newCapacity;//ì‚¬ì´ì¦ˆ ì—…ë°ì´íŠ¸
     }
 public:
     SimpleVector() {
@@ -40,7 +40,7 @@ public:
 
     void pop_back() {
         if (currentSize <= 0) {
-            cout << "Á¦°Å ÇÒ ¿ø¼Ò ¾øÀ½" << endl;
+            cout << "ì œê±° í•  ì›ì†Œ ì—†ìŒ" << endl;
         }
         else
             currentSize--;
@@ -64,13 +64,13 @@ public:
 
 
 int main() {
-    // SimpleVector<int>ÀÇ ±âº» »ı¼ºÀÚ »ç¿ë
+    // SimpleVector<int>ì˜ ê¸°ë³¸ ìƒì„±ì ì‚¬ìš©
     SimpleVector<int> vec;
    
-    // ¿ä¼Ò Ãß°¡ (push_back)
+    // ìš”ì†Œ ì¶”ê°€ (push_back)
     while(1){
         
-        cout << "¿ä¼Ò¸¦ Ãß°¡ÇÏ¼¼¿ä 0À» ´©¸£¸é Áß´ÜÇÕ´Ï´Ù" << endl;
+        cout << "ìš”ì†Œë¥¼ ì¶”ê°€í•˜ì„¸ìš” 0ì„ ëˆ„ë¥´ë©´ ì¤‘ë‹¨í•©ë‹ˆë‹¤" << endl;
         int num = 0;
         cin >> num;
         
@@ -80,11 +80,11 @@ int main() {
             break;
         }
     }
-    // ÇöÀç Å©±â¿Í ¿ë·® Ãâ·Â
+    // í˜„ì¬ í¬ê¸°ì™€ ìš©ëŸ‰ ì¶œë ¥
     cout << "Size: " << vec.size() << endl;
     cout << "Capacity: " << vec.capacity() << endl;
 
-    // µ¥ÀÌÅÍ Á¤·Ä
+    // ë°ì´í„° ì •ë ¬
     cout << "vec: ";
     for (int i = 0; i < vec.size(); i++) {
         cout << vec[i] << " ";
@@ -99,7 +99,7 @@ int main() {
     }
     cout << endl;
 
-    // ¸¶Áö¸· ¿ä¼Ò Á¦°Å
+    // ë§ˆì§€ë§‰ ìš”ì†Œ ì œê±°
     vec.pop_back();
     cout << "pop_back: ";
     for (int i = 0; i < vec.size(); i++) {
